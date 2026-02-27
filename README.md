@@ -1,1 +1,67 @@
-# QUANTUM_RADIO_SERVER
+
+HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Realm Radio - Pure AI Music Station</title>
+    
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="icon" type="image/png" href="icon.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Quantum Radio">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh; display: flex; justify-content: center; align-items: center;
+            overflow: hidden; color: white;
+        }
+        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+        .particle { position: absolute; width: 4px; height: 4px; background: rgba(255, 0, 255, 0.5); border-radius: 50%; animation: float 15s infinite; box-shadow: 0 0 10px rgba(255, 0, 255, 0.8); }
+        @keyframes float { 0%, 100% { transform: translateY(100vh); opacity: 0; } 10%, 90% { opacity: 1; } 100% { transform: translateY(-100vh); } }
+        .radio-container { position: relative; z-index: 10; width: 90%; max-width: 500px; background: rgba(20, 20, 40, 0.9); border-radius: 30px; padding: 40px; border: 1px solid rgba(255, 0, 255, 0.2); backdrop-filter: blur(10px); text-align: center; }
+        .station-name { font-size: 28px; font-weight: 700; background: linear-gradient(90deg, #ff00ff, #00ffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 3px; margin-bottom: 20px; }
+        .waveform-bar { display: inline-block; width: 4px; height: 20px; margin: 0 2px; background: #00ffff; animation: wave 1s infinite ease-in-out; }
+        @keyframes wave { 0%, 100% { height: 10px; } 50% { height: 40px; } }
+        .controls button { background: #ff00ff; border: none; padding: 10px 20px; border-radius: 10px; color: white; cursor: pointer; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    <div class="radio-container">
+        <div class="station-name">Quantum Realm Radio</div>
+        <p>Current: <strong id="trackTitle">Majorana Dreams</strong></p>
+        <div id="waveform"></div>
+        <audio id="audioPlayer" controls autoplay>
+            <source src="https://dl.dropboxusercontent.com/scl/fo/7wv10yog12ynwqw9rqgsu/AN_kXXk0mWxjUBYVWqBj-PE?rlkey=suhiz6nctbdv370zyejsiumu1&dl=1" type="audio/mpeg">
+        </audio>
+        <div class="controls">
+            <button onclick="location.reload()">Shuffle Next</button>
+        </div>
+    </div>
+
+    <script>
+        // Particle generation
+        const container = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const p = document.createElement('div');
+            p.className = 'particle';
+            p.style.left = Math.random() * 100 + '%';
+            p.style.animationDelay = Math.random() * 15 + 's';
+            container.appendChild(p);
+        }
+        // Waveform generation
+        const wave = document.getElementById('waveform');
+        for (let i = 0; i < 20; i++) {
+            const bar = document.createElement('div');
+            bar.className = 'waveform-bar';
+            bar.style.animationDelay = (i * 0.05) + 's';
+            wave.appendChild(bar);
+        }
+    </script>
+</body>
+</html>
